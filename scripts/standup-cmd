@@ -54,7 +54,8 @@ def main(argv):
             'Content-type': 'application/json'
             })
     resp = conn.getresponse()
-    print resp
+    # Print a useful log
+    print resp.status, resp.reason, resp.read()
 
 
 if __name__ == '__main__':

@@ -6,7 +6,7 @@ from standup.apps.status.models import Project, Status
 from standup.apps.users.models import User
 from standup.database import get_session
 from standup.utils import slugify, jsonify
-
+from standup.tests import user as user_test_thingy
 
 blueprint = Blueprint('api_v1', __name__, url_prefix='/api/v1')
 
@@ -104,7 +104,8 @@ def create_status():
     # Get the user
     user = db.query(User).filter_by(username=username).first()
     if not user:
-        return jsonify(dict(error='User does not exist.')), 400
+        #autocreate users for testing
+        user = user_test_thingy(username=username, name=username, email=username+"@mozilla.com", slug=username, save=True)
 
     # Get or create the project (but not if this is a reply)
     if project_slug and not replied:

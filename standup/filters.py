@@ -49,7 +49,8 @@ def format_update(update, project=None):
     PULL_RE = re.compile(r'(pull|pr) #?(\d+)', flags=re.I)
 
     # Remove icky stuff.
-    formatted = clean(update, tags=[])
+    # formatted = clean(update, tags=[]) ; for some reason this bleaches out all of my statuses
+    formatted = update;#clean(update, tags=[])
 
     # Linkify "bug #n" and "bug n" text.
     formatted = BUG_RE.sub(
